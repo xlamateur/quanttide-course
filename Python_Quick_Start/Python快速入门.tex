@@ -1,0 +1,787 @@
+\documentclass[13pt]{beamer}
+% xeLaTeX
+
+% theme
+\mode<presentation>
+{
+\usetheme{Warsaw}
+
+\setbeamercovered{transparent}
+}
+
+% packages and settings
+\usepackage{ctex}
+
+\usepackage{xcolor}
+\definecolor{mygray}{RGB}{245,245,245}
+
+\usepackage{listings}
+\lstset{language=Python}
+\input{listings-python.prf}
+\lstset{escapeinside=``}
+\lstset{numbers=left}
+\lstset{breaklines}
+\lstset{backgroundcolor=\color{mygray}}
+
+\usepackage{multicol}
+
+\usepackage{hyperref}
+\hypersetup{urlcolor=blue}
+
+% settings
+\setbeamertemplate{frametitle continuation}{}
+
+ \AtBeginSection[]
+ {
+ \begin{frame}<beamer>[plain]
+ \frametitle{目录}
+ \begin{multicols}{2}
+ \tableofcontents[currentsection,hideothersubsections,currentsubsection]
+ \end{multicols}
+ \end{frame}
+ }
+ 
+ \AtBeginSubsection[]
+ {
+ \begin{frame}<beamer>[plain]
+ \frametitle{目录}
+ \begin{multicols}{2}
+ \tableofcontents[currentsection,hideothersubsections,currentsubsection]
+ \end{multicols}
+ \end{frame}
+ }
+
+
+% body
+\begin{document}
+
+
+\title{Python快速入门}
+\author{张果}
+\institute[Universities of]
+{
+厦门大学\quad 王亚南经济研究院}
+\renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日}
+\date{本版本：\today}
+\subject{Lectures}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{目录}
+\begin{multicols}{2}
+\tableofcontents
+\end{multicols}
+\end{frame}
+
+\section{引言}
+\begin{frame}
+\frametitle{什么是程序？}
+\begin{itemize}
+  \item 程序：输入 $\to$ 输出
+  \item 程序 = 数据结构 + 算法
+  \begin{itemize}
+    \item 数据结构：储存、组织数据
+    \item 算法：具体步骤
+  \end{itemize}
+  \item 程序：实现需求，解决问题
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{为什么选择Python？}
+\begin{itemize}
+\item 易学易用，开发效率高
+\item 强大的胶水
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{如何选择Python版本？}
+\begin{itemize}
+\item 2.x vs 3.x?
+\begin{itemize}
+\item 为什么3.x无法完全取代2.x？没有真正解决2.x的问题。
+\item 2.x和3.x互相迁移很困难？不是。
+\end{itemize}
+\item 2.x：选择2.6以上版本
+\item 3.x：选择3.4以上版本
+\item 本教程使用2.7.y(y>=9)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Python开发环境}
+\begin{itemize}
+\item \href{https://www.python.org}{\underline{Python官方工具}}
+\item \href{http://www.jetbrains.com/pycharm/}{\underline{PyCharm：主流IDE}}
+\item \href{https://www.continuum.io/downloads}{\underline{Anaconda：科学计算专用}}
+\item \href{http://jupyter.org}{\underline{Jupyter：浏览器版iPython}}
+\item \href{https://www.sublimetext.com/3}{\underline{Sublime Text 3：可拓展性极强的文本编辑器}}
+\end{itemize}
+\end{frame}
+
+\section{基础知识}
+\begin{frame}[containsverbatim]
+\frametitle{Python解释器}
+\begin{lstlisting}
+>>> # `输出0到 9`
+>>> for i in range(10):
+...     print i,
+...
+0 1 2 3 4 5 6 7 8 9
+\end{lstlisting}
+\begin{itemize}
+  \item \lstinline{>>>}     \#主提示符
+  \item \lstinline{...}         \#次提示符
+  \item \lstinline{#}         \#注释
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{语句与表达式}
+\begin{itemize}
+  \item 语句：\lstinline{print 'Hello,world'}
+  \item 表达式：\lstinline{abs(-4)}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{帮助}
+\begin{lstlisting}
+>>> help(input)
+Help on built-in function input in module __builtin__:
+
+input(...)
+
+    input([prompt]) -> value
+    
+    Equivalent to eval(raw_input(prompt)).
+    
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{帮助}
+\begin{lstlisting}
+>>> help(print)
+  File "<stdin>", line 1
+    help(print)
+             ^
+SyntaxError: invalid syntax
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{操作符}
+\begin{itemize}
+\item 算术操作符：+,-,*,/,//,\%,**
+\begin{lstlisting}
+>>> 1/2,1//2,1.0/2,1.0//2
+(0, 0, 0.5, 0.0)
+>>> 4**2
+16
+>>> 7%3
+1
+\end{lstlisting}
+\item 比较操作符：<,<=,>,>=,==,!=
+\item 逻辑操作符：\lstinline{and,or,not}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{变量与赋值}
+\begin{lstlisting}
+>>> counter = 0
+>>> # `给变量counter赋值0`
+\end{lstlisting}
+\end{frame}
+
+\section{输出与输入}
+\subsection{输出}
+\begin{frame}[containsverbatim]
+\frametitle{输出}
+\begin{itemize}
+  \item 交互式解释器
+\begin{lstlisting}
+>>> 'Hello,world'
+'Hello,world'
+>>> _  # `最后一个表达式的值`
+'Hello,world'
+\end{lstlisting}
+  \item print语句
+\begin{lstlisting}
+>>> print 'Hello,world'
+Hello,world
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{输出}
+注释：
+\begin{itemize}
+\item \lstinline{print}调用Python对象的\lstinline{__str__()}方法;
+\item 交互式解释器调用\lstinline{__repr__()}方法。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{格式化输出}
+\begin{lstlisting}
+>>> print "%d, my favorate %s, but %f" %(1,'Python',1.1)
+1, my favorate Python, but 1.100000
+\end{lstlisting}
+\begin{itemize}
+  \item \%d: 整型
+  \item \%f: 浮点型
+  \item \%s: 字符串
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{重定向到日志}
+\begin{lstlisting}
+log = open('C:/test.log','a')
+print >> log,'My favorate food'
+print >> log,'My favorate drink'
+log.close()
+\end{lstlisting}
+\end{frame}
+
+\subsection{输入}
+\begin{frame}[containsverbatim]
+\frametitle{input}
+\begin{lstlisting}
+>>> input('please input your favorate number:')
+please input your favorate number:7
+7
+>>> type(_)
+<type 'int'>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{raw\_input}
+\begin{lstlisting}
+>>> raw_input('please input your favorate number:')
+please input your favorate number:7
+'7'
+>>> type(_)
+<type 'str'>
+\end{lstlisting}
+\end{frame}
+
+\section{基本数据类型}
+\subsection{数字}
+\begin{frame}[containsverbatim]
+\frametitle{数字}
+\begin{itemize}
+\item 整型
+\begin{itemize}
+  \item 有符号整型(\lstinline{int}): \lstinline{1}
+  \item 长整型(\lstinline{long}): \lstinline{100000L,100000l}
+  \item 布尔值(\lstinline{bool}): \lstinline{True, False}
+\end{itemize}
+\item 浮点型(\lstinline{float}): \lstinline{1.1}
+\item 复数(\lstinline{complex}): \lstinline{1+1j,1+1J}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim,allowframebreaks]
+\frametitle{数字}
+\begin{lstlisting}
+>>> type(1)
+<type 'int'>
+>>> type(100000L)
+<type 'long'>
+>>> type(True)
+<type 'bool'>
+>>> type(1.1)
+<type 'float'>
+>>> type(1+1j)
+<type 'complex'>
+\end{lstlisting}
+\end{frame}
+
+\subsection{序列}
+\begin{frame}[containsverbatim]
+\frametitle{序列(senquence)}
+\begin{itemize}
+\item 列表(\lstinline{list}): [1,3,4]
+\item 元组(\lstinline{tuple}): (1,3,4,5)
+\item 字符串(\lstinline{str}): 'Hello,world',"Hello,world"
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{序列(senquence)}
+\begin{lstlisting}
+>>> type([1,3,4])
+<type 'list'>
+>>> type((1,3,4,5))
+<type 'tuple'>
+>>> type('hello,world')
+<type 'str'>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim,allowframebreaks]
+\frametitle{序列(senquence)}
+\begin{lstlisting}
+>>> # `创建序列`
+>>> aList = [1,2,3,4]
+>>> aTuple = (1,2,3,4)
+>>> aStr = 'hello,world'
+>>> # `索引`
+>>> aList[0]
+1
+>>> aTuple[3]
+4
+>>> aStr[4]
+'o'
+>>> # `切片`
+>>> aList[0:2]
+[1, 2]
+>>> aTuple[:3]
+(1, 2, 3)
+>>> aStr[4:]
+'o,world'
+\end{lstlisting}
+\end{frame}
+
+\subsection{集合和映射类型}
+\begin{frame}[containsverbatim]
+\frametitle{集合和映射类型}
+\begin{itemize}
+\item 集合(\lstinline{set}): \{1,5,6\}
+\item 字典(\lstinline{dict}): \{'xiaoming':1,'xiaohong':2\}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{集合和映射类型}
+\begin{lstlisting}
+>>> type({1,5,6})
+<type 'set'>
+>>> type({'xiaoming':1,'xiaohong':2})
+<type 'dict'>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim,allowframebreaks]
+\frametitle{字典}
+\begin{lstlisting}
+>>> aDict = {'x':1}  # `创建字典`
+>>> aDict['y']=2  # `添加键值对`
+>>> aDict
+{'y': 2, 'x': 1}
+>>> aDict['x']  # `索引字典`
+1
+\end{lstlisting}
+\framebreak
+\begin{lstlisting}
+>>> aDict.keys()  # `字典的键`
+['y', 'x']
+>>> aDict.values()  # `字典的值`
+[2, 1]
+>>> aDict.items()  # `键值对`
+[('y', 2), ('x', 1)]
+\end{lstlisting}
+\end{frame}
+
+\section{基本控制语句}
+\subsection{if语句}
+\begin{frame}[containsverbatim]
+\frametitle{if}
+\begin{lstlisting}
+>>> a = 4
+>>> if a<10:
+...     print 'Hello,world'
+...
+Hello,world
+\end{lstlisting}
+注释：代码块\textbf{缩进}表达逻辑（一般是四个空格）
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{if-else}
+\begin{lstlisting}
+>>> a = 4
+>>> if a<10:
+...     print 'Hello,world'
+... else:
+...     print 'Hello'
+...
+Hello,world
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{if-elif-else}
+\begin{lstlisting}
+>>> a = 4
+>>> if a<10:
+...     print 'Hello,world'
+... elif a<15:
+...     print 'Hello?'
+... else:
+...     print 'Hello'
+...
+Hello,world
+\end{lstlisting}
+\end{frame}
+
+
+\subsection{for语句}
+\begin{frame}[containsverbatim]
+\frametitle{迭代器循环}
+\begin{lstlisting}
+>>> for item in {'my','your','their','his','her'}:
+...     print item,
+...
+their his my your her
+\end{lstlisting}
+注释：list,tuple,set,str等都是可迭代对象
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{用range实现计数器循环}
+\begin{lstlisting}
+>>> for i in range(10):
+...     print i,
+...
+0 1 2 3 4 5 6 7 8 9
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{enumerate}
+\begin{lstlisting}
+>>> foo = 'abcdefglijklmn'
+>>> for i,ch in enumerate(foo):
+...     print ch,'(%d)'%i,',',
+...
+a (0) , b (1) , c (2) , d (3) , e (4) , f (5) , g (6) , l (7) , i (8) , j (9) , k (10) , l (11) , m (12) , n (13) ,
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{zip}
+\begin{lstlisting}
+>>> a = [1,2,3]
+>>> b = (2,3,4)
+>>> for i,j in zip(a,b):
+...     print i,j
+...
+1 2
+2 3
+3 4
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{列表解析}
+\begin{lstlisting}
+>>> [x**2 for x in range(4)]
+[0, 1, 4, 9]
+>>> [x**2 for x in range(10) if ((x**2)%2)]
+[1, 9, 25, 49, 81]
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{字典解析}
+\begin{lstlisting}
+>>> {x:x**2 for x in range(4)}
+{0: 0, 1: 1, 2: 4, 3: 9}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{集合解析}
+\begin{lstlisting}
+>>> {x**2 for x in range(4)}
+set([0, 1, 4, 9])
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{生成器(generator)}
+\begin{lstlisting}
+>>> (x**2 for x in range(4))
+<generator object <genexpr> at 0x0000000002D25678>
+>>> for i in _:
+...    print i,
+...
+0 1 4 9
+\end{lstlisting}
+\end{frame}
+
+\subsection{while语句}
+\begin{frame}[containsverbatim]
+\frametitle{计数器循环}
+\begin{lstlisting}
+>>> a = 0
+>>> while a<10:
+...    print a,
+...    a = a + 1
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{无限循环}
+\begin{lstlisting}
+>>> a = 0
+>>> while True:
+...    print a,
+...    a = a + 1
+\end{lstlisting}
+注意：慎用。一般在服务器程序等类似情况下中使用。
+\end{frame}
+
+\subsection{break和continue}
+\begin{frame}[containsverbatim,allowframebreaks]
+\frametitle{break和continue}
+\begin{itemize}
+\item \lstinline{break}: 结束当前循环，跳转到下个语句
+\item \lstinline{continue}；终止当前循环，忽略剩余语句，回到循环顶端
+\end{itemize}
+\begin{lstlisting}
+>>> a = 0
+>>> while a<100:
+...     a = a + 1
+...     if not a%5:
+...         continue
+...     print a,
+...     if a == 97:
+...          break
+...
+1 2 3 4 6 7 8 9 11 12 13 14 16 17 18 19 21 22 23 24 26 27 28 29 31 32 33 34 36
+37 38 39 41 42 43 44 46 47 48 49 51 52 53 54 56 57 58 59 61 62 63 64 66 67 68 69 
+71 72 73 74 76 77 78 79 81 82 83 84 86 87 88 89 91 92 93 94 96 97
+\end{lstlisting}
+\end{frame}
+
+\subsection{pass语句}
+\begin{frame}[containsverbatim]
+\frametitle{pass语句}
+\begin{itemize}
+\item 功能：不做任何事情
+\begin{itemize}
+\item 开发和调试
+\item 异常处理
+\end{itemize}
+\end{itemize}
+\begin{lstlisting}
+>>> for i in range(10):
+...     pass
+...
+>>>
+\end{lstlisting}
+\end{frame}
+
+\section{文件和文件系统操作}
+
+\subsection{文件}
+\begin{frame}[containsverbatim]
+\frametitle{写入文件}
+\begin{lstlisting}
+>>> import os
+>>> os.getcwd()  # get current working dictionary
+>>> f = open('test.txt','w')
+>>> f.write('Hello,world')
+>>> f.close()
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{读取文件}
+\begin{lstlisting}
+>> import os
+>> os.getcwd()
+>> f = open('test.txt','r')
+>> f.read()
+>> f.close()
+\end{lstlisting} 
+\end{frame}
+
+\subsection{文件系统}
+\begin{frame}
+\frametitle{os模块:文件处理}
+\begin{itemize}
+  \item \lstinline{os.remove(fname)}  \# 删除文件
+  \item \lstinline{os.rename(oldname,newname)}  \# 重命名/移动文件
+  \item \lstinline{os.walk(path)} \# 生成一个目录树下所有文件
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{os模块:目录和文件夹}
+\begin{itemize}
+  \item \lstinline{os.chdir(path)}  \# 改变当前工作目录
+  \item \lstinline{os.listdir(path)}  \# 列出指定目录的文件名
+  \item \lstinline{os.getcwd()} \# 返回当前工作目录
+  \item \lstinline{os.mkdir(path)} \# 创建目录
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{os.path模块:路径名分隔}
+\begin{itemize}
+  \item \lstinline{os.path.basename(fname)} \# 去掉目录路径，返回文件名
+  \item \lstinline{os.path.dirname(fname)}  \# 去掉文件名，返回目录路径
+  \item \lstinline{os.path.join(dirname,basename)} \# 组合目录名和文件名
+  \item \lstinline{os.path.split(fname)} \# 拆分目录名和文件名
+  \item \lstinline{os.path.splitext(path)} \#拆分路径名和扩展名
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{os.path模块:路径名信息}
+\begin{itemize}
+  \item \lstinline{os.path.exists(path)} \# 指定路径（文件or目录）
+  \item \lstinline{os.path.isfile(fname)}  指定路径是否存在且为一个文件
+  \item \lstinline{os.path.isdir(dirname)}  指定路径是否存在且为一个目录
+\end{itemize}
+\end{frame}
+
+\section{错误与异常}
+\begin{frame}[containsverbatim]
+\frametitle{try-except语句}
+\begin{lstlisting}
+>>> try:
+...     open('test.txt')
+... except IOError:
+...     print 'No such file'
+...
+No such file
+\end{lstlisting}
+\end{frame}
+ 
+\section{函数}
+\subsection{调用函数}
+\begin{frame}
+\frametitle{调用函数}
+\begin{itemize}
+  \item 帮助：dir, help
+  \item 工厂函数：int, float, str, dict, tuple, list, set, file
+  \item 长度：len
+  \item 类型：type
+  \item 排序：sort, reserved
+  \item 数学：max, min, abs
+\end{itemize}
+\end{frame}
+
+\subsection{定义函数}
+\begin{frame}[containsverbatim]
+\frametitle{定义函数}
+\begin{lstlisting}
+>>> def test(arg):
+...     return arg*2-4
+...
+>>> test(4)
+4
+\end{lstlisting}
+\end{frame}
+
+\subsection{函数的参数*}
+\begin{frame}
+\frametitle{函数的参数*}
+\begin{itemize}
+  \item 默认参数
+  \item 可变参数
+  \item 关键词参数
+\end{itemize}
+参考资料：\href{http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001374738449338c8a122a7f2e047899fc162f4a7205ea3000}
+{\underline{廖雪峰Python2.7教程：函数的参数}}
+\end{frame}
+ 
+\section{类*}
+\subsection{定义类*}
+\begin{frame}[containsverbatim]
+\frametitle{定义类*}
+\begin{lstlisting}
+>>> class Test(object):
+...     def __init__(self,myname):
+...          self.name = myname
+...     def __str__(self):
+...          return self.name*2
+...     def __repr__(self):
+...          return self.name*3
+...
+>>>
+\end{lstlisting}
+\end{frame}
+
+\subsection{创建类实例*}
+\frametitle{创建类实例*}
+\begin{frame}[containsverbatim]
+\begin{lstlisting}
+>>> Test('Bob')
+BobBobBob
+>>> print Test('Bob')
+BobBob
+\end{lstlisting}
+\end{frame}
+
+\section{模块}
+\subsection{导入和使用模块}
+\begin{frame}[containsverbatim,allowframebreaks]
+\frametitle{导入和使用模块}
+\begin{lstlisting}
+>>> import string
+>>> dir(string)
+['Formatter', 'Template', '_TemplateMetaclass', '__builtins__', '__doc__', '__fi
+le__', '__name__', '__package__', '_float', '_idmap', '_idmapL', '_int', '_long'
+, '_multimap', '_re', 'ascii_letters', 'ascii_lowercase', 'ascii_uppercase', 'at
+of', 'atof_error', 'atoi', 'atoi_error', 'atol', 'atol_error', 'capitalize', 'ca
+pwords', 'center', 'count', 'digits', 'expandtabs', 'find', 'hexdigits', 'index'
+, 'index_error', 'join', 'joinfields', 'letters', 'ljust', 'lower', 'lowercase',
+ 'lstrip', 'maketrans', 'octdigits', 'printable', 'punctuation', 'replace', 'rfi
+nd', 'rindex', 'rjust', 'rsplit', 'rstrip', 'split', 'splitfields', 'strip', 'sw
+apcase', 'translate', 'upper', 'uppercase', 'whitespace', 'zfill']
+>>> string.uppercase
+'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+>>> string.lowercase
+'abcdefghijklmnopqrstuvwxyz'
+>>> string.whitespace
+'\t\n\x0b\x0c\r '
+>>> string.upper
+<function upper at 0x0000000002BB8278>
+>>> string.upper('agesrag')
+'AGESRAG'
+\end{lstlisting}
+\end{frame}
+
+\subsection{下载第三方模块}
+\begin{frame}[containsverbatim]
+\frametitle{下载第三方模块}
+\begin{itemize}
+\item 在命令行输入：
+\begin{itemize}
+  \item \lstinline{pip install <package>}
+  \item \lstinline{easy_insall <package>}
+\end{itemize}
+\item 常见问题:
+\begin{itemize}
+  \item
+  \href{http://www.crifan.com/run_pip_install_django_error_pip_is_not_recognized_as_an_internal_or_external_command_operable_program_or_batch_file/}
+  {\underline{pip不能使用}}
+  \item
+  \href{https://zhuanlan.zhihu.com/p/21380755?refer=xmucpp}{\underline{C扩展库不能安装}}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{目录}
+\begin{multicols}{2}
+\tableofcontents
+\end{multicols}
+\end{frame}
+
+\end{document}
